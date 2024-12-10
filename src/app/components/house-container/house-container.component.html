@@ -2,10 +2,6 @@
   class="container"
   *ngIf="result && result.simulationResult?.simulationRuns as runs"
 >
-  <p>
-    Total simulations: {{ result.simulationResult!.simulationRuns!.length }}
-  </p>
-  <p>Average time: {{ result.averageTime }} h</p>
   <ng-container *ngFor="let start of runs; let i = index">
     <ng-container *ngIf="i % 3 === 0">
       <div class="row">
@@ -18,6 +14,7 @@
             }"
           >
             <app-house-grid
+            (increaseSimulationCount)="onSimulationFinished($event)"
               [gridPerHour]="simulation.gridPerHour"
               [columns]="result!.columns!"
               [rows]="result!.rows!"

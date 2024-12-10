@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HouseGridComponent } from './components/house-grid/house-grid.component';
 import { SimulationService } from './services/simulation.service';
 import { HouseContainerComponent } from './components/house-container/house-container.component';
+import { SummaryContainerComponent } from './components/summary-container/summary-container.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { HouseContainerComponent } from './components/house-container/house-cont
     InputFormComponent,
     HouseGridComponent,
     HouseContainerComponent,
+    SummaryContainerComponent
   ],
   imports: [BrowserModule, RouterModule, HttpClientModule, ReactiveFormsModule],
   providers: [ApiService, SimulationService],

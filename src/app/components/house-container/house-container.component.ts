@@ -9,10 +9,25 @@ import { SimulationResultDto } from '../../dtos/simulation-result-dto';
 })
 export class HouseContainerComponent {
   result: SimulationResultDto | null = null;
-
+  finishedSimulationsCount: number = 0;
+  totalSimulations: number = 0;
   constructor(private simulationService: SimulationService) {
     this.simulationService.simulationResult$.subscribe((result) => {
-      this.result = result;
+      if (result) {
+        this.result = result;
+        this.simulationService.simulationsAreDone(false);
+        this.totalSimulations =
+          this.result!.simulationResult.simulationRuns.length;
+      }
     });
+  }
+
+  onSimulationFinished(increase: number) {
+    this.finishedSimulationsCount += increase;
+    if (this.finishedSimulationsCount === this.totalSimulations) {
+      this.totalSimulations = 0;
+      this.finishedSimulationsCount = 0;
+      this.simulationService.simulationsAreDone(true);
+    }
   }
 }

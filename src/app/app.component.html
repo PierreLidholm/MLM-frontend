@@ -1,2 +1,17 @@
-<app-input-form (simulationValuesEmitter)="startSimulation($event)"></app-input-form>
-<app-house-container></app-house-container>
+<div class="container mt-3">
+  <h1>Svea MLM simulator</h1>
+  <p>
+    Enter total columns, rows and how many simulations to run to start the
+    simulations.
+  </p>
+
+  <app-input-form
+    (simulationValuesEmitter)="startSimulation($event)"
+  ></app-input-form>
+  <app-summary-container
+    *ngIf="showResults"
+    [averageTime]="averageTime"
+    [totalSimulations]="totalSimulations"
+  ></app-summary-container>
+  <app-house-container></app-house-container>
+</div>
