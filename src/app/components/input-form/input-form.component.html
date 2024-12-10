@@ -43,23 +43,23 @@
     </div>
 
     <div class="col-3">
-      <label for="totalRuns" class="form-label">Total runs</label>
+      <label for="totalSimulations" class="form-label">Total simulations</label>
       <input
-        id="totalRuns"
+        id="totalSimulations"
         type="number"
-        formControlName="totalRuns"
+        formControlName="totalSimulations"
         min="1"
         max="100"
         class="form-control"
         [class.is-invalid]="
-          simulationForm.get('totalRuns')?.invalid && submitted
+          simulationForm.get('totalSimulations')?.invalid && submitted
         "
       />
       <div
         class="invalid-feedback"
-        *ngIf="simulationForm.get('totalRuns')?.invalid && submitted"
+        *ngIf="simulationForm.get('totalSimulations')?.invalid && submitted"
       >
-        Enter how many runs should be simulated. Maximum 100 runs.
+        Enter how many simulations should be simulated. Maximum 100 runs.
       </div>
     </div>
     <div class="col-3 d-flex flex-column justify-content-end">

@@ -33,11 +33,11 @@ export class AppComponent {
       .get(
         simulationValues.rows,
         simulationValues.columns,
-        simulationValues.totalRuns
+        simulationValues.totalSimulations
       )
       .subscribe((simulationResultDto: SimulationResultDto) => {
         if (simulationResultDto !== null) {
-          this.totalSimulations = simulationValues.totalRuns;
+          this.totalSimulations = simulationValues.totalSimulations;
           this.averageTime = simulationResultDto.averageTime;
           this.simulationService.updateSimulationResult(simulationResultDto);
         }
