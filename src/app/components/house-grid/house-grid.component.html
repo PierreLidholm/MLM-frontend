@@ -1,0 +1,33 @@
+<div class="container border border-dark" *ngIf="houseGrid">
+  <div class="row">
+    <div class="col-12 mt-2 mb-2">
+      <ng-container *ngIf="doneSimulating === false">
+        <p class="mb-2">Current time: {{ currentHour }}h</p>
+      </ng-container>
+
+      <ng-container *ngIf="doneSimulating === true">
+        <p class="mb-2">
+          Total time:
+          {{ maxHour }}h
+        </p>
+      </ng-container>
+    </div>
+  </div>
+  <div
+    *ngFor="let row of createArray(houseGrid!.rows); let i = index"
+    class="row mb-2"
+  >
+    <div
+      *ngFor="let col of createArray(houseGrid!.columns); let j = index"
+      class="col text-center"
+    >
+      <i
+        class="bi bi-house-fill"
+        style="font-size: 1.5rem"
+        [ngStyle]="{
+          color: colorizeHouseIfItHasBeenVisited(i, j) ? 'green' : 'red'
+        }"
+      ></i>
+    </div>
+  </div>
+</div>

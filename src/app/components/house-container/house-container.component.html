@@ -1,0 +1,30 @@
+<div
+  class="container"
+  *ngIf="result && result.simulationResult?.simulationRuns as runs"
+>
+  <p>
+    Total simulations: {{ result.simulationResult!.simulationRuns!.length }}
+  </p>
+  <p>Average time: {{ result.averageTime }} h</p>
+  <ng-container *ngFor="let start of runs; let i = index">
+    <ng-container *ngIf="i % 3 === 0">
+      <div class="row">
+        <ng-container *ngFor="let simulation of runs | slice : i : i + 3">
+          <div
+            [ngClass]="{
+              'col-12 mb-3': runs.length === 1,
+              'col-12 col-lg-6 mb-3': runs.length === 2,
+              'col-12 col-lg-4 mb-3': runs.length > 2
+            }"
+          >
+            <app-house-grid
+              [gridPerHour]="simulation.gridPerHour"
+              [columns]="result!.columns!"
+              [rows]="result!.rows!"
+            ></app-house-grid>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
