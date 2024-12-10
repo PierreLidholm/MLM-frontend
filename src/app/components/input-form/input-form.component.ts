@@ -13,13 +13,11 @@ export class InputFormComponent {
   simulationForm: FormGroup;
   submitted = false;
 
-  constructor(
-    private fb: FormBuilder
-  ) {
+  constructor(private fb: FormBuilder) {
     this.simulationForm = this.fb.group({
       columns: [null, [Validators.required, Validators.min(2)]],
       rows: [null, [Validators.required, Validators.min(2)]],
-      totalRuns: [null, [Validators.required, Validators.min(1)]],
+      totalSimulations: [null, [Validators.required, Validators.min(1)]],
     });
   }
 
@@ -38,10 +36,10 @@ export class InputFormComponent {
       var simulationValues: ISimulationValues = {
         rows: simulationInputForm.rows,
         columns: simulationInputForm.columns,
-        totalRuns: simulationInputForm.totalRuns
-      }
+        totalSimulations: simulationInputForm.totalSimulations,
+      };
 
-      this.simulationValuesEmitter.emit(simulationValues)
+      this.simulationValuesEmitter.emit(simulationValues);
     }
   }
 }
