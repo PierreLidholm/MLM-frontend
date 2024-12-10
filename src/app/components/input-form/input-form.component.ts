@@ -17,16 +17,19 @@ export class InputFormComponent {
     private fb: FormBuilder
   ) {
     this.simulationForm = this.fb.group({
-      columns: [null, [Validators.required, Validators.min(1)]],
-      rows: [null, [Validators.required, Validators.min(1)]],
+      columns: [null, [Validators.required, Validators.min(2)]],
+      rows: [null, [Validators.required, Validators.min(2)]],
       totalRuns: [null, [Validators.required, Validators.min(1)]],
     });
   }
 
+  //Check if the form is valid
   isValid(): boolean {
     return this.simulationForm.valid;
   }
 
+  //Emit values if the inputs are valid
+  //Else show error messages
   onSubmit(): void {
     this.submitted = true;
 

@@ -7,12 +7,19 @@ import { SimulationResultDto } from '../dtos/simulation-result-dto';
 })
 export class SimulationService {
 
-  private simulationResult = new Subject<SimulationResultDto>();
+  private simulationResult = new BehaviorSubject<SimulationResultDto | null>(null);
+
+  private allSimulationsAreDone = new BehaviorSubject<boolean>(false);
   
-  // Expose the BehaviorSubject as an Observable to subscribers
   simulationResult$ = this.simulationResult.asObservable();
-  
-  updateSimulationResult(simulationResult: SimulationResultDto): void {
+  allSimulationsAreDone$ = this.allSimulationsAreDone.asObservable();
+
+
+  updateSimulationResult(simulationResult: SimulationResultDto | null): void {
     this.simulationResult.next(simulationResult);
+  }
+
+  simulationsAreDone(status: boolean) {
+    this.allSimulationsAreDone.next(status);
   }
 }

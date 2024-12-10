@@ -10,7 +10,7 @@
         id="columns"
         type="number"
         formControlName="columns"
-        min="1"
+        min="2"
         max="8"
         class="form-control"
         [class.is-invalid]="simulationForm.get('columns')?.invalid && submitted"
@@ -19,7 +19,7 @@
         class="invalid-feedback"
         *ngIf="simulationForm.get('columns')?.invalid && submitted"
       >
-        Enter how many columns each grid should have. Maximum 8 columns.
+        Enter how many columns each grid should have. Maximum of 8 columns.
       </div>
     </div>
 
@@ -29,7 +29,7 @@
         id="rows"
         type="number"
         formControlName="rows"
-        min="1"
+        min="2"
         max="8"
         class="form-control"
         [class.is-invalid]="simulationForm.get('rows')?.invalid && submitted"
@@ -38,7 +38,7 @@
         class="invalid-feedback"
         *ngIf="simulationForm.get('rows')?.invalid && submitted"
       >
-        Enter how many rows each grid should have. Maximum 8 rows.
+        Enter how many rows each grid should have. Maximum of 8 rows.
       </div>
     </div>
 

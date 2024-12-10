@@ -1,5 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { SimulationService } from '../../services/simulation.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SimulationResultDto } from '../../dtos/simulation-result-dto';
 import { IHouse } from '../../interfaces/house.interface';
 import { IHouseGrid } from '../../interfaces/house-grid.interface';
@@ -14,39 +13,39 @@ export class HouseGridComponent implements OnInit {
   @Input({ required: true }) gridPerHour!: IGridPerHour[];
   @Input({ required: true }) columns!: number;
   @Input({ required: true }) rows!: number;
+  @Output() increaseSimulationCount = new EventEmitter<number>();
+
   result: SimulationResultDto | null = null;
   houseGrid: IHouseGrid | null = null;
   currentHour: number = 0;
   maxHour: number = 0;
-  intervalId: any;
+  interval: any;
 
   doneSimulating: boolean = false;
 
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.maxHour = this.gridPerHour[this.gridPerHour.length - 1].hour;
     this.createHouses();
-    this.intervalId = setInterval(() => {
+    this.interval = setInterval(() => {
       this.nextHour();
     }, 1000);
   }
 
-  ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
-  }
 
+
+  //Increase the current hour every second until the maxhour is reached
   nextHour(): void {
     if (this.currentHour < this.maxHour) {
       this.currentHour++;
     } else {
-      clearInterval(this.intervalId);
+      this.increaseSimulationCount.emit(1);
+      clearInterval(this.interval);
     }
   }
 
-  //Create all houses that should be in each grid
+  //Create all houses that should be in the grid
   createHouses() {
     this.houseGrid = {
       columns: this.columns,
@@ -88,6 +87,8 @@ export class HouseGridComponent implements OnInit {
     return false;
   }
 
+
+  //Get all visited houses
   checkIfHouseHasSalesmanAtHour(x: number, y: number, hour: number) {
     const hourData = this.gridPerHour.find((g) => g.hour === hour);
 
@@ -107,6 +108,13 @@ export class HouseGridComponent implements OnInit {
 
     if (!this.houseGrid?.houses.find((h) => h.visited === false)) {
       this.doneSimulating = true;
+      
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.interval) {
+      clearInterval(this.interval);
     }
   }
 }
