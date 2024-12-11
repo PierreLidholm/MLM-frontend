@@ -1,10 +1,13 @@
 <div
   class="container"
-  *ngIf="result && result.simulationResult?.simulationRuns as runs"
+  *ngIf="
+    simulationResult &&
+    simulationResult.simulationResult?.simulationRuns as runs
+  "
 >
   <ng-container *ngFor="let start of runs; let i = index">
     <ng-container *ngIf="i % 3 === 0">
-      <div class="row">
+      <div class="row" data-testid="houseRow">
         <ng-container *ngFor="let simulation of runs | slice : i : i + 3">
           <div
             [ngClass]="{
@@ -14,10 +17,11 @@
             }"
           >
             <app-house-grid
-            (increaseSimulationCount)="onSimulationFinished($event)"
+              data-testid="houseGrid"
+              (increaseSimulationCount)="onSimulationFinished($event)"
               [gridPerHour]="simulation.gridPerHour"
-              [columns]="result!.columns!"
-              [rows]="result!.rows!"
+              [columns]="simulationResult!.columns!"
+              [rows]="simulationResult!.rows!"
             ></app-house-grid>
           </div>
         </ng-container>

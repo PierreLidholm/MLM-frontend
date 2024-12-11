@@ -8,16 +8,16 @@ import { SimulationResultDto } from '../../dtos/simulation-result-dto';
   styleUrl: './house-container.component.scss',
 })
 export class HouseContainerComponent {
-  result: SimulationResultDto | null = null;
+  simulationResult: SimulationResultDto | null = null;
   finishedSimulationsCount: number = 0;
   totalSimulations: number = 0;
   constructor(private simulationService: SimulationService) {
     this.simulationService.simulationResult$.subscribe((result) => {
       if (result) {
-        this.result = result;
+        this.simulationResult = result;
         this.simulationService.simulationsAreDone(false);
         this.totalSimulations =
-          this.result!.simulationResult.simulationRuns.length;
+          this.simulationResult!.simulationResult.simulationRuns.length;
       }
     });
   }

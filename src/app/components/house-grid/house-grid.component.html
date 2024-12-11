@@ -16,10 +16,13 @@
   <div
     *ngFor="let row of createArray(houseGrid!.rows); let i = index"
     class="row mb-2"
+    data-testid="rows"
   >
     <div
       *ngFor="let col of createArray(houseGrid!.columns); let j = index"
       class="col text-center"
+
+      data-testid="columns"
     >
       <i
         class="bi bi-house-fill"
