@@ -9,6 +9,7 @@
     (simulationValuesEmitter)="startSimulation($event)"
   ></app-input-form>
   <app-summary-container
+    data-testid="summaryContainer"
     *ngIf="showResults"
     [averageTime]="averageTime"
     [totalSimulations]="totalSimulations"
